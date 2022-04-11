@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Admin Page</title>
+    </h:head>
+    <h:body>
+        <h3>Admin Name: #{loginView.authenticatedUser.name}</h3>
+        <p>Your user id is #{loginView.authenticatedUser.email}</p>
+	<p>This is a private page, which requires login to access.</p>
+        
+	<h:link value="Create new account" outcome="register" />
+        
+        <br></br>
+        <h:link value="Delete exist account" outcome="remove" />
+        <h:form>
+		<h:commandLink action="#{loginView.logout}" value="Logout" />
+	</h:form>
+    </h:body>
+</html>
+

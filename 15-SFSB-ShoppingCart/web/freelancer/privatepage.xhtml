@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" >
+    <h:head>
+        <title>Freelancer Page</title>
+    </h:head>
+    <h:body>       
+        <h2>List search results for open jobs: </h2>
+        <h:form>
+            <h:dataTable value="#{searchJobsBeans.findbyStatus()}" var="jobs"
+                         border="1" width="300" cellpadding="5">
+
+                <h:column>
+                    <f:facet name='header'>ID</f:facet>
+                        #{jobs.jobsId}    
+                </h:column>
+
+                <h:column>
+                    <f:facet name='header'>Title</f:facet>
+                        #{jobs.title}    
+                </h:column>
+
+                <h:column>
+                    <f:facet name='header'>Description</f:facet>
+                        #{jobs.description}    
+                </h:column>
+                
+                <h:column>
+                    <f:facet name='header'>Keywords</f:facet>
+                        #{jobs.keywords}    
+                </h:column>
+                
+                <h:column>
+                    <f:facet name='header'>Payment</f:facet>
+                        #{jobs.payment}    
+                </h:column>
+                
+                <h:column>
+                        <f:facet name="header">Accept</f:facet>
+                        <h:commandButton value="Apply" 
+                                         action="#{removeView.removeUser(user)}">
+                        </h:commandButton>
+                </h:column>
+                
+                <h:column>
+                        <f:facet name="header">Reject</f:facet>
+                        <h:commandButton value="Revoke" 
+                                         action="#{removeView.removeUser(user)}">
+                        </h:commandButton>
+                </h:column>
+            </h:dataTable>
+            <br/><br/>
+            <h:outputText value="#{removeView.removeUser(user)}" escape="false"/>
+        </h:form>
+        
+        <h2>Search keywords for jobs</h2>        
+        <h:form>
+            <h:panelGrid columns ="2">
+                <h:inputText value="#{searchJobsBeans.keywords}"/>
+                <h:commandButton value="Search"/>
+                <br/>
+            </h:panelGrid>             
+	</h:form>
+        
+        <h:form>
+            <h:dataTable value="#{searchJobsBeans.findbyKeyword()}" var="jobs"
+                         border="1" width="300" cellpadding="5">
+                <h:column>
+                    <f:facet name='header'>ID</f:facet>
+                        #{jobs.jobsId}    
+                </h:column>
+
+                <h:column>
+                    <f:facet name='header'>Title</f:facet>
+                        #{jobs.title}    
+                </h:column>
+
+                <h:column>
+                    <f:facet name='header'>Description</f:facet>
+                        #{jobs.description}    
+                </h:column>
+                
+                <h:column>
+                    <f:facet name='header'>Keywords</f:facet>
+                        #{jobs.keywords}    
+                </h:column>
+                
+                <h:column>
+                    <f:facet name='header'>Payment</f:facet>
+                        #{jobs.payment}    
+                </h:column>
+                
+                <h:column>
+                    <f:facet name='header'>Status</f:facet>
+                        #{jobs.status}    
+                </h:column>
+                
+                <h:column>
+                        <f:facet name="header">Accept</f:facet>
+                        <h:commandButton value="Apply" 
+                                         action="#{removeView.removeUser(user)}">
+                        </h:commandButton>
+                </h:column>
+                
+                <h:column>
+                        <f:facet name="header">Reject</f:facet>
+                        <h:commandButton value="Revoke" 
+                                         action="#{removeView.removeUser(user)}">
+                        </h:commandButton>
+                </h:column>
+                <br></br>
+            </h:dataTable>
+        </h:form>
+
+	<h3>Freelancer Name: #{loginView.authenticatedUser.name}</h3>
+	<p>Your user id is #{loginView.authenticatedUser.email}</p>
+	<p>This is a private page, which requires login to access.</p>
+        <h:form>
+		<h:commandLink action="#{loginView.logout}" value="Logout" />
+	</h:form>
+    </h:body>
+</html>
+

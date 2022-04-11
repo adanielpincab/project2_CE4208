@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core" >
+<h:head>
+	<title>remove</title>
+</h:head>
+    <h:body>
+        
+        <h2>Remove a user from the database:</h2>
+        <h:form>
+            <h:panelGrid columns ="2">
+                Enter the User Email that you want to remove from the database:
+                <h:inputText value="#{removeView.email}"/>
+                <br/>
+                <h:commandButton action="remove" value="Show by Email"/>  
+            </h:panelGrid>
+
+        </h:form>
+
+        <h2>List the User with email: #{removeView.email} </h2>
+        <h:form>
+            <h:dataTable value="#{removeView.findUserByEmail()}" var="user"
+                         border="1" width="300" cellpadding="5">
+
+                <h:column>
+                    <f:facet name='header'>Email</f:facet>
+                        #{user.email}    
+                </h:column>
+
+                <h:column>
+                    <f:facet name='header'>Name</f:facet>
+                        #{user.name}    
+                </h:column>
+
+                <h:column>
+                        <f:facet name="header">Delete</f:facet>
+                        <h:commandButton value="Delete" 
+                                         action="#{removeView.removeUser(user)}">
+                        </h:commandButton>
+                </h:column>
+                
+            </h:dataTable>
+
+        </h:form>
+
+        <h2>List the Provider's Job descriptions: #{removeView.email} </h2>
+        <h:form>
+            <h:dataTable value="#{removeView.findJobDescriptionByEmail()}" var="Job"
+                         border="1" width="300" cellpadding="5">
+
+                <h:column>
+                    <f:facet name='header'>ID</f:facet>
+                        #{Job.jobsId}    
+                </h:column>
+
+                <h:column>
+                    <f:facet name='header'>Provider ID</f:facet>
+                        #{Job.providerId.id}    
+                </h:column>
+                
+                <h:column>
+                    <f:facet name='header'>Title</f:facet>
+                        #{Job.title}    
+                </h:column>
+
+                <h:column>
+                    <f:facet name='header'>Keywords</f:facet>
+                        #{Job.keywords}    
+                </h:column>
+                
+                <h:column>
+                    <f:facet name='header'>Description</f:facet>
+                        #{Job.description}    
+                </h:column>
+
+                <h:column>
+                    <f:facet name='header'>Payment</f:facet>
+                        #{Job.payment}    
+                </h:column>
+                
+                <h:column>
+                    <f:facet name='header'>Status</f:facet>
+                        #{Job.status}    
+                </h:column>
+                
+                <h:column>
+                        <f:facet name="header">Delete</f:facet>
+                        <h:commandButton value="Delete" 
+                                         action="#{removeView.removeJobDescriptions(Job)}">
+                        </h:commandButton>
+                </h:column>
+                
+            </h:dataTable>
+            <br/>
+        </h:form>
+        
+        <br/><br/>
+        <h:link value="Admin Home Page" outcome="adminpage" />
+    </h:body>
+</html>
