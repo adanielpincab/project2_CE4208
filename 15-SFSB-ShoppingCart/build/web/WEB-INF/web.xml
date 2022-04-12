@@ -22,6 +22,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/signin.xhtml</welcome-file>
+        <welcome-file>faces/admin/register.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
