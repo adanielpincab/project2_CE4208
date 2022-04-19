@@ -21,6 +21,12 @@ import entity.Provider;
 import entity.User;
 import jakarta.inject.Named;
 
+import utils.AuthenticationUtils;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import jakarta.xml.bind.DatatypeConverter;
+
 @Named(value = "loginView")
 @SessionScoped
 public class LoginView implements Serializable {
@@ -44,7 +50,62 @@ public class LoginView implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
                 this.generateAdmin(); //generates a default admin if required
-		try {
+		
+                //---
+                this.user = userEJB.findUserById(email);
+                
+                
+                if( this.user == null ){
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No user with that email exists. Try again.", null));
+                    // clear the session
+                    ((HttpSession) context.getExternalContext().getSession(false)).invalidate();
+                    return "signin";
+                }
+                
+                try {
+                    //System.out.println(AuthenticationUtils.encodeSHA256(password));
+                    //System.out.println(this.user.getPassword());
+                    if (!this.user.getPassword().equals(AuthenticationUtils.encodeSHA256(password))){
+                        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrect password. Try again.", null));
+                        // clear the session
+                        ((HttpSession) context.getExternalContext().getSession(false)).invalidate();
+                        return "signin";
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    System.out.println("UTF-8 is not supported in the system.");
+                } catch (NoSuchAlgorithmException e) {
+                    System.out.println("SHA256 is not supported in the system.");
+                }
+                
+                System.out.println("Logged in user: " + user.getName() + " (" + user.getEmail() + ")");
+                
+                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+                sessionMap.put("User", user);
+                
+                this.provider = userEJB.findProviderById(user.getEmail());
+                this.freelancer = userEJB.findFreelancerById(user.getEmail());
+                
+                if(this.provider != null){
+                        this.provider = userEJB.findProviderById(user.getEmail());
+                        return "/provider/privatepage?faces-redirect=true";
+                }
+                else if(this.freelancer != null){
+                        this.freelancer = userEJB.findFreelancerById(user.getEmail());
+                        return "/freelancer/privatepage?faces-redirect=true";
+                }
+                else{ // If he's not ointo any group he's an admin
+                        // clear the session
+			((HttpSession) context.getExternalContext().getSession(false)).invalidate();
+                        return "/admin/adminpage?faces-redirect=true";
+		}
+                
+                //---
+                
+                /*
+                OLD CODE (KEEPING IT JUST IN CASE)
+                
+                try {
 			request.login(email, password);
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -53,11 +114,10 @@ public class LoginView implements Serializable {
 			// clear the session
 			((HttpSession) context.getExternalContext().getSession(false)).invalidate();
                         return "signin";
-		}
-
+		}*/
+                /*
 		Principal principal = request.getUserPrincipal();
-                
-                this.user = userEJB.findUserById(principal.getName());
+                //this.user = userEJB.findUserById(principal.getName());
                 
 		log.info("Authentication done for user: " + principal.getName());
 
@@ -83,6 +143,7 @@ public class LoginView implements Serializable {
 			((HttpSession) context.getExternalContext().getSession(false)).invalidate();
                         return "signin";
 		}
+                return "<h1>Logged in</h1>";*/
 	}
 
 	public String logout() {
