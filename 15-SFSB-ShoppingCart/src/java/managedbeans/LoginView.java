@@ -1,6 +1,7 @@
 package managedbeans;
 
 import java.io.Serializable;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Map;
 import java.util.logging.Level;
@@ -22,6 +23,7 @@ import entity.User;
 import jakarta.inject.Named;
 
 import utils.AuthenticationUtils;
+import utils.LogFile;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -63,6 +65,12 @@ public class LoginView implements Serializable {
                     context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No user with that email exists. Try again.", null));
                     // clear the session
                     ((HttpSession) context.getExternalContext().getSession(false)).invalidate();
+                    // log login try
+                    try {
+                        LogFile.main(String.format("Email not Found: %s", email));
+                    } catch(IOException e) {
+                        e.printStackTrace();
+                    }
                     return "signin";
                 }
                 
@@ -116,7 +124,6 @@ public class LoginView implements Serializable {
 			request.login(email, password);
 		} catch (ServletException e) {
 			e.printStackTrace();
-                        log.log(Level.SEVERE, e.getMessage(), e);
                         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed!", null));
 			// clear the session
 			((HttpSession) context.getExternalContext().getSession(false)).invalidate();
