@@ -45,6 +45,10 @@ public class LoginView implements Serializable {
 	private User user;
         private Provider provider;
         private Freelancer freelancer;
+        
+        private int tries = 0;
+        
+//        private bool auth
 
 	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -69,6 +73,7 @@ public class LoginView implements Serializable {
                         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrect password. Try again.", null));
                         // clear the session
                         ((HttpSession) context.getExternalContext().getSession(false)).invalidate();
+                        tries++;
                         return "signin";
                     }
                 } catch (UnsupportedEncodingException e) {
@@ -76,6 +81,8 @@ public class LoginView implements Serializable {
                 } catch (NoSuchAlgorithmException e) {
                     System.out.println("SHA256 is not supported in the system.");
                 }
+                
+                tries = 0;
                 
                 System.out.println("Logged in user: " + user.getName() + " (" + user.getEmail() + ")");
                 
