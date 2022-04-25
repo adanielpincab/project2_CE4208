@@ -66,11 +66,7 @@ public class LoginView implements Serializable {
                     // clear the session
                     ((HttpSession) context.getExternalContext().getSession(false)).invalidate();
                     // log login try
-                    try {
-                        LogFile.main(String.format("Email not Found: %s", email));
-                    } catch(IOException e) {
-                        e.printStackTrace();
-                    }
+                    LogFile.LoginLog(String.format("Email not Found: %s", email));
                     return "signin";
                 }
                 

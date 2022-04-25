@@ -15,7 +15,7 @@ import java.io.*;
 
 public class LogFile {
     
-    public static void LoginLog(String msg) throws IOException {
+    public static void LoginLog(String msg) {
         Logger log = Logger.getLogger(LogFile.class.getName());
 
         //
