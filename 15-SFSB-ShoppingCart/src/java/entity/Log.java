@@ -6,10 +6,9 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import java.sql.Timestamp;
 
 /*
     A log that gets stored into the database
@@ -23,13 +22,17 @@ public class Log implements Serializable {
 	
 	@Id
         @Basic(optional = false)
+        @Column(name="timestamp", nullable=false, length=100)
+	private String timestamp;
 	@Column(name="message", nullable=false, length=500)
 	private String message;
 
         public Log() {
-		this.message = "";
+            this.timestamp = getTimestamp();	
+            this.message = "";
 	}
 	public Log(String message) {
+                this.timestamp = getTimestamp();
 		this.message = message;
 	}
 	
@@ -41,4 +44,9 @@ public class Log implements Serializable {
 	public void setMessage(String msg) {
 		this.message = msg;
 	}
+        
+        private String getTimestamp() {
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            return timestamp.toString();// 2021-03-24 16:34:26.6665
+        }
 }

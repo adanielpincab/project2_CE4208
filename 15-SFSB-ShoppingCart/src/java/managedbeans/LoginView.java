@@ -63,6 +63,7 @@ public class LoginView implements Serializable {
                 
                 if( this.user == null ){
                     context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No user with that email exists. Try again.", null));
+                    userEJB.logMessage("USER <" + email + "> FAILED LOGIN (USER DOES NOT EXIST)");
                     // clear the session
                     ((HttpSession) context.getExternalContext().getSession(false)).invalidate();
                     // log login try
@@ -75,6 +76,7 @@ public class LoginView implements Serializable {
                     //System.out.println(this.user.getPassword());
                     if (!this.user.getPassword().equals(AuthenticationUtils.encodeSHA256(password))){
                         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrect password. Try again.", null));
+                        userEJB.logMessage("USER <" + user.getEmail() + "> FAILED LOGIN (INCORRECT PASSWORD)");
                         // clear the session
                         ((HttpSession) context.getExternalContext().getSession(false)).invalidate();
                         tries++;
@@ -89,6 +91,7 @@ public class LoginView implements Serializable {
                 tries = 0;
                 
                 System.out.println("Logged in user: " + user.getName() + " (" + user.getEmail() + ")");
+                userEJB.logMessage("USER <" + user.getEmail() + "> LOGGED IN CORRECTLY");
                 
                 ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		Map<String, Object> sessionMap = externalContext.getSessionMap();
@@ -110,56 +113,13 @@ public class LoginView implements Serializable {
 			((HttpSession) context.getExternalContext().getSession(false)).invalidate();
                         return "/admin/adminpage?faces-redirect=true";
 		}
-                
-                //---
-                
-                /*
-                OLD CODE (KEEPING IT JUST IN CASE)
-                
-                try {
-			request.login(email, password);
-		} catch (ServletException e) {
-			e.printStackTrace();
-                        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed!", null));
-			// clear the session
-			((HttpSession) context.getExternalContext().getSession(false)).invalidate();
-                        return "signin";
-		}*/
-                /*
-		Principal principal = request.getUserPrincipal();
-                //this.user = userEJB.findUserById(principal.getName());
-                
-		log.info("Authentication done for user: " + principal.getName());
-
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		Map<String, Object> sessionMap = externalContext.getSessionMap();
-                
-                sessionMap.put("User", user);
-
-
-		if(request.isUserInRole("admins")) {
-                        return "/admin/adminpage?faces-redirect=true";
-                }
-                else if(request.isUserInRole("providers")){
-                        this.provider = userEJB.findProviderById(principal.getName());
-                        return "/provider/privatepage?faces-redirect=true";
-                }
-                else if(request.isUserInRole("freelancers")){
-                        this.freelancer = userEJB.findFreelancerById(principal.getName());
-                        return "/freelancer/privatepage?faces-redirect=true";
-                }
-                else{
-                        // clear the session
-			((HttpSession) context.getExternalContext().getSession(false)).invalidate();
-                        return "signin";
-		}
-                return "<h1>Logged in</h1>";*/
 	}
 
 	public String logout() {
                 FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 		try {
+                        userEJB.logMessage("USER LOGGED OUT");
 			this.user = null;
 			request.logout();
 			// clear the session
@@ -170,7 +130,6 @@ public class LoginView implements Serializable {
 		} catch (ServletException e) {
 			log.log(Level.SEVERE, "Failed to logout user!", e);
 		}
-
 		return "/signin?faces-redirect=true";
 	}
         

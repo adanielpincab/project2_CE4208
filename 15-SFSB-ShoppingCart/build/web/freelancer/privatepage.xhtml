@@ -100,14 +100,14 @@
                 <h:column>
                         <f:facet name="header">Accept</f:facet>
                         <h:commandButton value="Apply" 
-                                         action="#{removeView.removeUser(user)}">
+                                         action="#{removeView.accept(loginView.authenticatedUser, jobs)}">
                         </h:commandButton>
                 </h:column>
                 
                 <h:column>
                         <f:facet name="header">Reject</f:facet>
                         <h:commandButton value="Revoke" 
-                                         action="#{removeView.removeUser(user)}">
+                                         action="#{removeView.revoke(loginView.authenticatedUser, jobs)}">
                         </h:commandButton>
                 </h:column>
                 <br></br>
