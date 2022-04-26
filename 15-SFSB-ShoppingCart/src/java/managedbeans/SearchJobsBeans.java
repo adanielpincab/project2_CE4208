@@ -24,10 +24,7 @@ import jakarta.annotation.Resource;
 
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
-/**
- *
- * @author Thadd
- */
+
 @Named(value = "searchJobsBeans")
 @SessionScoped
 

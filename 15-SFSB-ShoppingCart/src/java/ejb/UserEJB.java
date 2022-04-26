@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
+import entity.Log;
 import entity.Jobs;
 import entity.Group;
 import entity.Provider;
@@ -39,6 +40,7 @@ public class UserEJB {
      * @param String userType
      * @return User user
      */
+    
     public User createUser(User user, String userType) {
             try {
                     user.setPassword(AuthenticationUtils.encodeSHA256(user.getPassword()));
@@ -148,6 +150,11 @@ public class UserEJB {
      */
     public void persist(Object object) {
         em.persist(object);
+    }
+    
+    public void logMessage(String message) {
+        Log newLog = new Log(message);
+        persist(newLog);
     }
     
     public void remove(User user) {

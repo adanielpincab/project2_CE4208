@@ -16,10 +16,6 @@ import jakarta.validation.constraints.Size;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author thad
- */
 @Entity
 @Table(name = "JOBS")
 @XmlRootElement

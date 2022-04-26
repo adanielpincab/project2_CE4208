@@ -23,12 +23,6 @@ import jakarta.inject.Named;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
-
-/**
- *
- * @author Yukuan
- */
-
 @Named(value = "removeView")
 @SessionScoped
 public class RemoveView implements Serializable {
@@ -70,6 +64,13 @@ public class RemoveView implements Serializable {
         //jobs = userEJB.findJobsById(provider.getId());   
         jobs = userEJB.findJobsById(provider); 
         return jobs;
+    }
+    
+    public void accept(User user, Jobs jobs) {
+        userEJB.logMessage("User " + user.getEmail() + " accepted job with ID: " + jobs.getJobsId().toString() );
+    }
+    public void revoke(User user, Jobs jobs) {
+        userEJB.logMessage("User " + user.getEmail() + " revoked job with ID: " + jobs.getJobsId().toString() );
     }
 
       /**

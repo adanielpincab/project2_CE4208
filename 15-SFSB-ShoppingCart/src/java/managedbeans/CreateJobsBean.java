@@ -14,10 +14,6 @@ import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import jakarta.inject.Inject;
 import java.util.logging.Logger;
-/**
- *
- * @author Thadd
- */
 @Named(value = "createJobsBean")
 @SessionScoped
 public class CreateJobsBean implements Serializable {
