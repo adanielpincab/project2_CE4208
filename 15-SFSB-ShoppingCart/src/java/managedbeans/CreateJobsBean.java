@@ -1,27 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package managedbeans;
 
 import ejb.JobEJB;
 import entity.Jobs;
 import entity.Provider;
-import managedbeans.LoginView;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import jakarta.inject.Inject;
 import java.util.logging.Logger;
+
 @Named(value = "createJobsBean")
 @SessionScoped
 public class CreateJobsBean implements Serializable {
-    /**
-     * 
-     */
     private static Logger log = Logger.getLogger(CreateJobsBean.class.getName());
-    //private LoginView login;
     
     @Inject
     private JobEJB jobejb;

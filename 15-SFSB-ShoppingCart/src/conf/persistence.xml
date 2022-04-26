@@ -14,7 +14,7 @@
             <property name="jakarta.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sun-appserv-samples"/>
             <property name="jakarta.persistence.jdbc.user" value="app"/>
             <property name="jakarta.persistence.jdbc.password" value="app"/>
-            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>

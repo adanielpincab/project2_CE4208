@@ -9,19 +9,15 @@ import java.io.Serializable;
 
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
 
 import ejb.UserEJB;
 import entity.User;
 import entity.Provider;
 import entity.Jobs;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import jakarta.annotation.Resource;
 import jakarta.inject.Named;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
 
 @Named(value = "removeView")
 @SessionScoped
@@ -60,8 +56,7 @@ public class RemoveView implements Serializable {
     public List<Jobs> findJobDescriptionByEmail() {
         Provider provider = null;
         List<Jobs> jobs = null;
-        provider = userEJB.findProviderById(email);
-        //jobs = userEJB.findJobsById(provider.getId());   
+        provider = userEJB.findProviderById(email);   
         jobs = userEJB.findJobsById(provider); 
         return jobs;
     }
@@ -73,10 +68,6 @@ public class RemoveView implements Serializable {
         userEJB.logMessage("User " + user.getEmail() + " revoked job with ID: " + jobs.getJobsId().toString() );
     }
 
-      /**
-     * Getter for UserEmail
-     * @return value of customerName 
-     */
     public String getEmail() {
         return email;
     }

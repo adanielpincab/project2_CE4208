@@ -2,12 +2,10 @@ package ejb;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-
 import entity.Log;
 import entity.Jobs;
 import entity.Group;
@@ -27,21 +25,18 @@ public class UserEJB {
 	
     @PersistenceContext(unitName="FormBasedAuthPU")
     private EntityManager em;
-    
     private String Message;
-    
     private Group groupEntity;
     private Provider provider;
     private Freelancer freelancer;
     private Jobs jobs;
-    /**
-     * createUser - creates user of user type {admins, freelancers, providers}
-     * @param User user
-     * @param String userType
-     * @return User user
-     */
     
     public User createUser(User user, String userType) {
+            /**
+            * @param User user
+            * @param String userType
+            * @return User user
+            */   
             try {
                     user.setPassword(AuthenticationUtils.encodeSHA256(user.getPassword()));
             } catch (Exception e) {
@@ -72,12 +67,12 @@ public class UserEJB {
 
             return user;
     }
-    /**
-     * findUserById - find user by ID in database
-     * @param id
-     * @return User user
-     */
+   
     public User findUserById(String id) {
+            /**
+            * @param id
+            * @return User user
+            */
             TypedQuery<User> query = em.createNamedQuery("findUserById", User.class);
             query.setParameter("email", id);
             User user = null;
@@ -89,12 +84,12 @@ public class UserEJB {
             }
             return user;
     }
-    /**
-     * findProviderById - find the provider by ID in Provider table
-     * @param String id (email)
-     * @return Provider provider
-     */
+   
     public Provider findProviderById(String id) {
+            /**
+            * @param String id (email)
+            * @return Provider provider
+            */
             TypedQuery<Provider> query = em.createNamedQuery("Provider.findByEmail", Provider.class);
             query.setParameter("email", id);
             Provider provider = null;
@@ -142,13 +137,13 @@ public class UserEJB {
 
     public Map<String,Object> getUserTypeValue() {
       return value;
-    }  
+    }
     
-    /**
-     * make the passed object persistent
-     * @param object object to be made persistent
-     */
     public void persist(Object object) {
+        /**
+        * make the passed object persistent
+        * @param object object to be made persistent
+        */
         em.persist(object);
     }
     

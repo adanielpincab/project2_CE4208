@@ -49,15 +49,12 @@ public class LoginView implements Serializable {
         private Freelancer freelancer;
         
         private int tries = 0;
-        
-//        private bool auth
 
 	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
                 this.generateAdmin(); //generates a default admin if required
-		
-                //---
+                
                 this.user = userEJB.findUserById(email);
                 
                 
