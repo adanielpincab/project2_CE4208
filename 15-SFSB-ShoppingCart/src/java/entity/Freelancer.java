@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
@@ -82,7 +77,6 @@ public class Freelancer implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method doesn't work if there's not id fields
         if (!(object instanceof Freelancer)) {
             return false;
         }

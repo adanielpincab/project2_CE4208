@@ -17,6 +17,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 })
 @Table(name="users")
 public class User implements Serializable {
+        // Default admin login:
         private static String DEF_ADMIN_EMAIL= "admin@admin.com";
         private static String DEF_NAME= "admin";
         private static String DEF_PWD= "admin";

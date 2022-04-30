@@ -6,10 +6,8 @@
 package managedbeans;
 
 import java.io.Serializable;
-
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
-
 import ejb.UserEJB;
 import entity.User;
 import entity.Provider;

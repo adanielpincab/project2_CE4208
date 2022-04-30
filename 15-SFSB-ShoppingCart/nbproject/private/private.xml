@@ -4,17 +4,24 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Unit03-LayeredDS"/>
         <group>
-            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/entity/Provider.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/web/freelancer/privatepage.xhtml</file>
             <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/utils/AuthenticationUtils.java</file>
-            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/managedbeans/SearchJobsBeans.java</file>
             <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/managedbeans/RemoveView.java</file>
-            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/utils/LogFile.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/entity/Jobs.java</file>
             <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/ejb/UserEJB.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/entity/Freelancer.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/validators/EmailValidator.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/managedbeans/CreateJobsBean.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/entity/User.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/entity/Group.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/managedbeans/SearchJobsBeans.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/ejb/JobEJB.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/web/provider/privatepage.xhtml</file>
             <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/managedbeans/RegisterView.java</file>
             <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/managedbeans/LoginView.java</file>
-            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/entity/User.java</file>
+            <file>file:/C:/Users/USER-PC/Desktop/15-SFSB-ShoppingCart/src/java/entity/Log.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,6 +1,4 @@
-
 package ejb;
-
 import entity.Jobs;
 import java.util.List;
 import jakarta.ejb.Stateless;
@@ -15,7 +13,10 @@ public class JobEJB {
     private EntityManager em;
     
     public Jobs createJob(Jobs job){
-        
+        /*
+            @param Jobs job
+            Create a new job in the database
+        */
         persist(job);
         return job;
     }
@@ -25,20 +26,26 @@ public class JobEJB {
     }
     
     public List<Jobs> findByKeywords(String keywords){
+        /*
+            @param String keywords
+            Find a job inside the database, searching by keyword
+        */
             TypedQuery<Jobs> query = em.createNamedQuery("Jobs.findByKeywords", Jobs.class);
             query.setParameter("keywords", keywords);
             List<Jobs> jobs = null;
             try {
                     jobs = query.getResultList();
-            } catch (Exception e) {
-                    // getSingleResult throws NoResultException in case there is no user in DB
-                    // ignore exception and return NULL for user instead
-            }
+            } catch (Exception e) {}
             return jobs;
     }
     
     
     public List<Jobs> findByStatus(String status){
+            /*
+                @param String status 
+                Find jobs inside the database by status
+            */
+        
             TypedQuery<Jobs> query = em.createNamedQuery("Jobs.findByStatus", Jobs.class);
             
             query.setParameter("status", status);
@@ -46,10 +53,7 @@ public class JobEJB {
             
             try {
                     jobs = query.getResultList();
-            } catch (Exception e) {
-                    // getSingleResult throws NoResultException in case there is no user in DB
-                    // ignore exception and return NULL for user instead
-            }
+            } catch (Exception e) {}
             return jobs;
     }
 

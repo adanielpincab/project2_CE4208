@@ -2,7 +2,6 @@ package managedbeans;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
-
 import jakarta.faces.application.FacesMessage;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.component.UIComponent;
@@ -10,7 +9,6 @@ import jakarta.faces.component.UIInput;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.ComponentSystemEvent;
 import jakarta.inject.Inject;
-
 import ejb.UserEJB;
 import entity.User;
 import jakarta.inject.Named;
@@ -33,7 +31,9 @@ public class RegisterView implements Serializable {
 	private String confirmPassword;
 
 	public void validatePassword(ComponentSystemEvent event) {
-
+                /**
+                 * Checks password validity.
+                 */
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		UIComponent components = event.getComponent();
@@ -70,6 +70,9 @@ public class RegisterView implements Serializable {
 	}
 
 	public String register() {
+                /**
+                 * Registers a user into the database.
+                 */
 		User user = new User(email, password, name);
 		userEJB.createUser(user, userType);
 		log.info("New user created with e-mail: " + email + " and name: " + name);

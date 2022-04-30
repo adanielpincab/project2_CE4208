@@ -2,7 +2,6 @@ package entity;
 
 import java.io.Serializable;
 import jakarta.persistence.Basic;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,14 +9,15 @@ import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.sql.Timestamp;
 
-/*
-    A log that gets stored into the database
-*/
-
 @XmlRootElement
 @Entity
 @Table(name="Logs")
 public class Log implements Serializable {
+        /*
+            A log that gets stored into the database,
+            contains a messgae and a timestamp.
+        */
+
 	private static final long serialVersionUID = -5892169641074303723L;
 	
 	@Id

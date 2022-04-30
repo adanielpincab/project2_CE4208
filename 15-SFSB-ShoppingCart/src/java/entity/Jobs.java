@@ -1,4 +1,3 @@
-
 package entity;
 
 import java.io.Serializable;
@@ -64,6 +63,15 @@ public class Jobs implements Serializable {
 
     public Jobs(String title, String keywords, String description, Double payment,
                 String status, Provider provider) {
+        /**
+         * Job class
+         * @param String title: job title
+         * @param String keywords: job kwyword
+         * @param String description: job description 
+         * @param Double payment: job payment (eur)
+         * @param String status: job status
+         * @param Provider provider: job provider
+        */
         this.title = title;
         this.keywords = keywords;
         this.description = description;
@@ -121,7 +129,6 @@ public class Jobs implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Jobs)) {
             return false;
         }

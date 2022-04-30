@@ -1,12 +1,9 @@
 package managedbeans;
 
 import java.io.Serializable;
-import java.io.IOException;
-import java.security.Principal;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import jakarta.faces.application.FacesMessage;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.ExternalContext;
@@ -15,19 +12,15 @@ import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
 import ejb.UserEJB;
 import entity.Freelancer;
 import entity.Provider;
 import entity.User;
 import jakarta.inject.Named;
-
 import utils.AuthenticationUtils;
 import utils.LogFile;
 import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import jakarta.xml.bind.DatatypeConverter;
 
 @Named(value = "loginView")
 @SessionScoped
@@ -35,7 +28,6 @@ public class LoginView implements Serializable {
 
 	private static final long serialVersionUID = 3254181235309041386L;
         
-
 	private static Logger log = Logger.getLogger(LoginView.class.getName());
 
 	@Inject
@@ -51,6 +43,10 @@ public class LoginView implements Serializable {
         private int tries = 0;
 
 	public String login() {
+                /**
+                 * Checks the login credentials for an user.
+                 * If they're correct, it logs the user in.
+                 */
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
                 this.generateAdmin(); //generates a default admin if required
@@ -113,6 +109,9 @@ public class LoginView implements Serializable {
 	}
 
 	public String logout() {
+                /**
+                 * Ends the user session.
+                 */ 
                 FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 		try {
